@@ -1,0 +1,57 @@
+npm i -D @playwright/test typescript
+npm init playwright@latest
+npm i -D @types/node
+
+for playwright.config.ts error
+workers: process.env.CI ? 1 : 4,
+type: "module"
+
+Setup in tsconfig.json
+"types": ["node"],
+"module": "ESNext",
+"moduleResolution": "Bundler",  //avoid import ..... .js/.ts error
+
+
+Setup in config.ts
+  use: {
+    browserName: 'chromium',
+    baseURL: 'https://www.xxxx.com',
+
+    //false for open window can see the process
+    //true = close window
+    headless: false,
+
+    //option: "on", "off","only-on-failure"
+    screenshot: 'only-on-failure',
+
+    //npx playwright show-trace trace.zip ---> for check log
+    //record error after 1st try
+    trace: 'on-first-retry',
+
+    video:"on",
+    launchOptions: {
+      slowMo: 200
+    },  //use launchOptions when need to record video, to see what error message
+  },
+
+
+
+/---------------------------------------------/
+px playwright test
+    Runs the end-to-end tests.
+
+  npx playwright test --ui
+    Starts the interactive UI mode.
+
+  npx playwright test --project=chromium
+    Runs the tests only on Desktop Chrome.
+
+  npx playwright test example
+    Runs the tests in a specific file.
+
+  npx playwright test --debug
+    Runs the tests in debug mode.
+
+  npx playwright codegen
+    Auto generate tests with Codegen.
+/------------------------------------------------/
