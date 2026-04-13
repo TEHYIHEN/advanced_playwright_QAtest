@@ -31,7 +31,7 @@ export default defineConfig({
   
     browserName: 'chromium',
     baseURL: 'https://www.saucedemo.com',
-    headless: false,
+    headless: process.env.CI ? true: false,
     screenshot: 'only-on-failure',
 
     video: 'on',
