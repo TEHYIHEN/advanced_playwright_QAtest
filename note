@@ -37,7 +37,7 @@ Setup in config.ts
 
 
 /---------------------------------------------/
-px playwright test
+  npx playwright test
     Runs the end-to-end tests.
 
   npx playwright test --ui
@@ -55,3 +55,7 @@ px playwright test
   npx playwright codegen
     Auto generate tests with Codegen.
 /------------------------------------------------/
+
+Extra Note:
+fixture.ts
+checkout.spec.ts

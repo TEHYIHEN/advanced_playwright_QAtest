@@ -31,7 +31,7 @@ export default defineConfig({
   
     browserName: 'chromium',
     baseURL: 'https://www.saucedemo.com',
-    headless: process.env.CI ? true: false,
+    headless: !!process.env.CI,
     screenshot: 'only-on-failure',
 
     video: 'on',
@@ -47,18 +47,55 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'auth-chromium',
+      testMatch: /.*auth.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Chrome'],
+        storageState: undefined
+       },
+    },
+    {
+      name: 'e2e-chromium',
+      testMatch: /.*e2e.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Chrome'],
+        storageState: 'auth.json'
+       },
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'auth-firefox',
+      testMatch: /.*auth.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Firefox'],
+        storageState: undefined
+      },
+    },
+
+     {
+      name: 'e2e-firefox',
+      testMatch: /.*e2e.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Firefox'],
+        storageState: 'auth.json'
+      },
     },
 
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'auth-webkit',
+      testMatch: /.*auth.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Safari'],
+        storageState: undefined
+      },
+    },
+    {
+      name: 'e2e-webkit',
+      testMatch: /.*e2e.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Safari'],
+        storageState: 'auth.json'
+      },
     },
 
     /* Test against mobile viewports. */
